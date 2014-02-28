@@ -1,0 +1,19 @@
+<!doctype html>
+<title>FeedMe at UChicago</title>
+<head>
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/static/hello.css" type="text/css" >
+</head>
+<body>
+  <h1>Hello! <br>Here's what you can eat today:</h1>
+
+{% for e in entries %}
+	<p><h2>{{e.id}}</h2><h3> {{e.gluten}} {{ e.milk}} {{ e.fish}} {{ e.shellfish}} {{ e.peanut}} {{ e.treenut}} {{ e.wheat}} {{ e.soy}}</h3><br>{{e.ingredients}}</p><br>
+{% endfor %}
+
+	<h2>These items are also being served, but they're off limits for the allergies you listed. Sorry!</h2>
+{% for c in canthave %}
+	<p> {{c.id}} (contains: {{c.gluten}} {{ c.milk}} {{ c.fish}} {{ c.shellfish}} {{ c.peanut}} {{ c.treenut}} {{ c.wheat}} {{ c.soy}}) </p>
+{% endfor %}
+</body>
