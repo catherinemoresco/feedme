@@ -1,9 +1,9 @@
-from flask import Flask, render_template, g
+from flask import Flask, render_template, g, request
 import sqlite3
 import os
-from getfood import getfood
+from getfood import getfood2
 app = Flask(__name__)
-app.config.from_object(__name__)
+app.config.from_object('config')
 
 app.config.update(dict(
 	DATABASE = os.path.join(app.root_path, 'feedme.db'),
@@ -11,38 +11,38 @@ app.config.update(dict(
 ))
 
 @app.route('/')
+
 def show_entries():
-	food = getfood()
-	placeholder = '?'
-	placeholders= ", ".join(placeholder for unused in food)
 	db = get_db()
-	query = 'SELECT * FROM food WHERE id IN (%s) AND gluten=" " AND milk=" "' % placeholders
-	cur = db.execute(query, food)
-	entries = cur.fetchall()
-	query = 'SELECT * FROM food WHERE id IN (%s) AND gluten!=" " AND milk!=" "' % placeholders
-	cur = db.execute(query, food)
-	canthave = cur.fetchall()
-	return render_template('hello.html', entries=entries, canthave=canthave)
+	foods = getfood2()
+	for time, stations in foods.iteritems():
+		for station, dishes in stations.iteritems():
+			for dish in dishes:
+				cur = db.execute('SELECT * FROM food WHERE id=?', (dish,))
+				entries = cur.fetchall()
+				if entries != []:
+					if len(entries) > 1:
+						star = '*'
+					else:
+						star = ''
+					foods[time][station][foods[time][station].index(dish)] = (dish, entries[0], star)
 
-# def show_entries():
-# 	entries = get_entries()
-# 	entries = entries['Brunch']
-# 	print entries
-# 	return render_template('hello.html', entries=entries)
+				else:
+					foods[time][station][foods[time][station].index(dish)] = (dish, "nodata")
+	foodslist = [("All Day", foods["All Day"]), ("Breakfast", foods['Breakfast']), ('Brunch', foods['Brunch']), ("Lunch", foods['Lunch']), ("Dinner", foods['Dinner']), ("Late Night", foods['Late Night'])]
+	remove_empties(foodslist)
+	return render_template('hello2.html', entries=foodslist)
 
-# def get_entries():
-# 	db = get_db()
-# 	food = getfood()
-# 	time = 'All Day'
-# 	for station in food[time].keys():
-# 		dishes = food[time][station]
-# 		placeholder = '?'
-# 		placeholders= ", ".join(placeholder for unused in dishes)
-# 		query = 'SELECT * FROM food WHERE id IN (%s) AND gluten=" " AND milk=" "' % placeholders
-# 		cur = db.execute(query, dishes)
-# 		entries = cur.fetchall()
-# 		food[time][station] = entries
-# 	return food
+def remove_empties(foods):
+	for food in foods:
+		if food[1] == {}:
+			foods.remove(food)
+	return foods
+
+
+@app.route('/welcome')
+def choose():
+	return render_template('welcome.html')
 
 @app.route('/browse')
 def browse():
@@ -56,18 +56,14 @@ def browseletter(startletter):
 	db = get_db()
 	cur = db.execute('SELECT * FROM food WHERE id LIKE (? || "%")' , startletter)
 	entries = cur.fetchall()
-	print startletter
 	return render_template('browse.html', entries=entries, startletter=startletter)
 
-def get_not_found(found, food):
-	found = []
-	not_found = []
-	for e in found:
-		found.append(e.id)
-	for f in food:
-		if f not in found:
-			not_found.append(f)
-	return not_found
+@app.route('/lookup/<dishname>')
+def lookup(dishname):
+	db = get_db()
+	cur = db.execute('SELECT * FROM food WHERE id=?', (dishname,))
+	entries = cur.fetchall()
+	return render_template('lookupdish.html', entries=entries)
 
 def get_db():
 	db = getattr(g, '_database', None)

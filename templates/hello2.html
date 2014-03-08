@@ -1,0 +1,36 @@
+<!doctype html>
+<title>FeedMe at UChicago</title>
+<head>
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/static/hello.css" type="text/css" >
+</head>
+<body>
+<!-- <h1>Hello! <br>Here's what you can eat today:</h1> -->
+
+
+
+{% for time in entries %}
+	<div id="{{time[0]}}" class="time">
+	<h2>{{time[0]}}</h2>
+	{% for key2, value2 in time[1].iteritems()%}
+		<div id="{{key2}}" class="station">
+		<div class="stationtitle">{{key2}}</div>
+		{% for value3 in value2 %}
+			{% if value3[1] != "nodata" %}
+			<div class="dishitem">
+			<div class="dataavailable dishname"><a href="/lookup/{{value3[0]}}">{{value3[0]}}{{value3[2]}}</a></div>
+			<div class="allergens">
+			{{value3[1].wheat}} {{value3[1].gluten}} {{value3[1].milk}} {{value3[1].peanut}} {{value3[1].treenut}} {{value3[1].fish}} {{value3[1].shellfish}} {{value3[1].soy}} {{value3[1].egg}}</div>
+			</div>
+			{% else %}
+			<div class="nodata dishname dishitem"><a href="/lookup/{{value3[0]}}" class="nodata">{{value3[0]}}</a><br><div class="allergens">No data available.</div></div>
+			{%endif%}
+		{% endfor %}
+		</div>
+	{% endfor %}
+	</div>
+{% endfor %}
+
+
+</body>

@@ -13,9 +13,12 @@ def getfood():
 	print soup.prettify()
 	return dishnames
 
-times = {'All Day':{}, 'Breakfast':{}, 'Brunch':{}, 'Lunch':{} ,'Dinner':{},}
+times = {'All Day':{}, 'Breakfast':{}, 'Lunch':{} ,'Dinner':{},'Late Night':{}, 'Brunch':{}}
+
+# parse webpage:
 def getfood2():
 	dishnames = []
+# get html:
 	soup = BeautifulSoup(urllib2.urlopen('http://www.campusdish.com/en-US/CSMW/UnivofChicago/#').read())
 	for dishes in soup.find_all(id="lcGrad"):
 		for d in dishes:
@@ -24,17 +27,18 @@ def getfood2():
 				timeofday = img['alt']
 			else:
 				station = d.a
-				stationname =  letters_only(station.get_text())
+				stationname =  letters_only(station.get_text()).upper()
 				times[timeofday][stationname] = []
 				for s in station.next_siblings:
+				#set new station name:
 					if s['class'] == [u'item1']:
 						stationname = letters_only(s.get_text())
 						times[timeofday][stationname] = []
 					else:
 						for c in s.contents:
 						 	if c['class'] == [u'item2']:
-						 		dishname = c.get_text()
-						 		times[timeofday][stationname].append(dishname)
+						 		dishname = remove_trailing_spaces(c.get_text())
+						 		times[timeofday][stationname].append(dishname.replace("/", "-"))
 
 	return times
 
@@ -42,13 +46,8 @@ def getfood2():
 def letters_only(uni):
 	return uni.replace("\r", "").replace("\t","").replace(">","").replace("\n","")
 
-print getfood()
+def remove_trailing_spaces(st):
+	while st[-1] == ' ':
+		st = st[0:len(st)-1]
+	return st
 
-# food = getfood()
-# for time in food:
-# 	print time
-# 	for station in food[time]:
-# 		print station
-# 		dishes = food[time][station]
-# 		for dish in dishes:
-# 			print dish

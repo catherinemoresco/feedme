@@ -1,10 +1,108 @@
 body{
 	font-family: 'Josefin Sans', sans-serif;
 	color: white;
-	background-color:pink;
+	background-color:orange;
 }
 
 h1{
 	font-family: 'Roboto Slab', serif;
-	font-size: 150px;
+	font-size: 80px;
+}
+
+h2{
+	font-family: 'Roboto Slab', serif;
+	font-size: 40px;
+}
+
+.nodata{
+	color:#E36A00;
+}
+
+a{
+	color:white;
+	text-decoration:none;
+}
+
+a.nodata{
+	color:#E36A00;
+}
+
+a.textlink{
+	text-decoration: underline;
+}
+
+a:hover{
+	font-style: italic;
+}
+
+.time{
+	padding: 60px;
+}
+
+.stationtitle{
+	font-size:30px;
+	padding: 15px;
+}
+
+.station{
+	padding:10px;
+}
+
+.dishitem{
+	padding: 5px;
+}
+
+.dishitem{
+	margin-left:30px;
+}
+
+.dishname{
+	font-size:20px;
+}
+
+.allergens{
+	font-size:15px;
+}
+
+input[type="checkbox"] {
+    display:none;
+}
+
+input[type="submit"] {
+    display:none;
+}
+
+.allergy+.labelcheck{
+	font-size:15px;
+	padding:3px;
+}
+.allergy:checked + .labelcheck{
+  color:orange;
+  background-color: white;
+  padding:3px;
+}
+
+#allergyform{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	width:75%;
+}
+
+#question{
+	min-width: 400px;
+	margin-top:25%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	width:80%;
+}
+
+.button{
+	padding: 60px;
+	font-size: 30px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	width:40%;
 }
