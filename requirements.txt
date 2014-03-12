@@ -8,7 +8,6 @@ beautifulsoup4==4.3.2
 distribute==0.6.15
 gunicorn==18.0
 itsdangerous==0.23
-pygame==1.9.1release
 pypm==1.3.4
 pythonselect==1.3
 virtualenv==1.6.1
