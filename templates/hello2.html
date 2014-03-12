@@ -4,33 +4,86 @@
 <link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="/static/hello.css" type="text/css" >
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
-<!-- <h1>Hello! <br>Here's what you can eat today:</h1> -->
-
-
-
+<div id="instructions">
+	<br>
+Click on an item for full ingredient information.<br>
+Starred items have two or more (possibly conflicting) entries.<br>
+Click [ <a href="/browse">here</a> ] to browse all items.
+<p id="closeinstructions">OK</p>
+</div>
+<div id="alldata">
+<h1>{{dhall}}</h1>
+[<a href='/select/{{other_dhall}}/{{selectallergens}}' id="switch"> Switch dining hall </a>] <br><br>
+<div id="toggles">
+<div id="hidenodata" class="toggle">[ Show dishes with no allergen data ]</div>
+<div id="hideallergic" class="toggle">[ Show dishes that you're allergic to ]</div>
+</div>
+<div id="menu">
 {% for time in entries %}
 	<div id="{{time[0]}}" class="time">
 	<h2>{{time[0]}}</h2>
 	{% for key2, value2 in time[1].iteritems()%}
 		<div id="{{key2}}" class="station">
 		<div class="stationtitle">{{key2}}</div>
-		{% for value3 in value2 %}
-			{% if value3[1] != "nodata" %}
-			<div class="dishitem">
-			<div class="dataavailable dishname"><a href="/lookup/{{value3[0]}}">{{value3[0]}}{{value3[2]}}</a></div>
+		{% for dish in value2 %}
+			{% if dish.entries != "unavailable" %}
+				{% if dish.entries == "allergic"%}
+					<div class="allergic dishitem">
+					<div class="dishname"><a href="/lookup/{{dish.name}}" class="allergic dishlink">{{dish.name}}{{dish.star}}</a></div>
+				{% else %}
+					<div class="notallergic dishitem">
+					<div class="dishname"><a href="/lookup/{{dish.name}}" class="notallergic dishlink">{{dish.name}}{{dish.star}}</a></div>
+				{%endif%}
 			<div class="allergens">
-			{{value3[1].wheat}} {{value3[1].gluten}} {{value3[1].milk}} {{value3[1].peanut}} {{value3[1].treenut}} {{value3[1].fish}} {{value3[1].shellfish}} {{value3[1].soy}} {{value3[1].egg}}</div>
+				{% for allergen in dish.allergens %}
+					{{allergen}}
+				{%endfor%}
+			</div>
 			</div>
 			{% else %}
-			<div class="nodata dishname dishitem"><a href="/lookup/{{value3[0]}}" class="nodata">{{value3[0]}}</a><br><div class="allergens">No data available.</div></div>
+			<div class="nodata dishname dishitem"><a href="/lookup/{{dish.entries[0]}}" class="nodata dishlink">{{dish.name}}</a><br><div class="allergens">No data available.</div></div>
 			{%endif%}
 		{% endfor %}
 		</div>
 	{% endfor %}
 	</div>
 {% endfor %}
+</div>
+</div>
 
+<script>
 
+$(function(){
+	$('div.allergic').hide();
+	$('div.nodata').hide();
+});
+
+$( '#closeinstructions').click(function(){
+	$("div#instructions").slideUp();
+});
+
+$( '#hidenodata' ).click(function() {
+  if ( $( "div.nodata:first" ).is( ":hidden" ) ) {
+    $( "div.nodata" ).show( "slow" );
+  } else {
+    $( "div.nodata" ).slideUp();
+  }
+});
+
+$( '#hideallergic' ).click(function() {
+  if ( $( "div.allergic:first" ).is( ":hidden" ) ) {
+    $( "div.allergic" ).show( 600 );
+  } else {
+    $( "div.allergic" ).slideUp();
+  }
+});
+</script>
+<div id="copyright"> 
+&copy; Catherine Moresco 2014<br>
+[ <a href="/info">Info<a> ]
+</div>
 </body>
+

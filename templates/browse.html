@@ -11,7 +11,15 @@
 {% else %}
   <h1>Here's a list of all allergen and ingredient information:</h1>
 {% endif %}
+<div class="browsemenu">[ 
+{% for letter in letters %}
+<a href="/browse/{{letter}}" class="lettermenu"> {{letter}} </a>
+{% endfor %}
+]
+</div>
+<div class="browselist">
 {% for e in entries %}
 	<p><h2>{{ e.id}}</h2><h3> {{e.gluten}} {{ e.milk}} {{ e.fish}} {{ e.shellfish}} {{ e.peanut}} {{ e.treenut}} {{ e.wheat}} {{ e.soy}}</h3><br>{{e.ingredients}}</p><br>
 {% endfor %}
+</div>
 </body>

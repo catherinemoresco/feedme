@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms import BooleanField
+from wtforms import BooleanField, RadioField
 
 
 class AllergyForm(Form):
@@ -12,3 +12,4 @@ class AllergyForm(Form):
 	treenut = BooleanField('Tree Nut')
 	peanut = BooleanField('Peanut')
 	egg = BooleanField('Egg')
+	# dhall = RadioField('Dining Hall', choices=[('Bartlett', 'Bartlett'), ('Cathey','Cathey')])

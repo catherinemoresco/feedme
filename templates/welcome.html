@@ -9,29 +9,34 @@
 
 <h1 id="question">What are your allergies?</h1>
 <div id="allergyform">
-<form>
-<input type="checkbox" class="allergy" id="Wheat">
-<label for="Wheat" class="labelcheck">wheat</label>
-<input type="checkbox" class="allergy" id="Gluten">
-<label for="Gluten" class="labelcheck">gluten</label>
-<input type="checkbox" class="allergy" id="Milk">
-<label for="Milk" class="labelcheck">milk</label>
-<input type="checkbox" class="allergy" id="Peanut">
-<label for="Peanut" class="labelcheck">peanut</label>
-<input type="checkbox" class="allergy" id="Tree Nut">
-<label for="Tree Nut" class="labelcheck">tree nut</label>
-<input type="checkbox" class="allergy" id="Fish">
-<label for="Fish" class="labelcheck">fish</label>
-<input type="checkbox" class="allergy" id="Shellfish">
-<label for="Shellfish" class="labelcheck">shellfish</label>
-<input type="checkbox" class="allergy" id="Egg">
-<label for="Egg" class="labelcheck">egg</label>
-<input type="checkbox" class="allergy" id="Soy">
-<label for="Soy" class="labelcheck">soy</label>
-</form>
+<form action="" method="post">
+{{ form.hidden_tag() }}
+{{form.gluten(class_='allergy')}} 
+<label for="gluten" class="labelcheck">gluten</label>
+{{form.milk(class_='allergy')}} 
+<label for="milk" class="labelcheck">milk</label>
+{{form.peanut(class_='allergy')}}
+<label for="peanut" class="labelcheck">peanut</label> 
+{{form.treenut(class_='allergy')}} 
+<label for="treenut" class="labelcheck">tree nut</label>
+{{form.wheat(class_='allergy')}} 
+<label for="wheat" class="labelcheck">wheat</label>
+{{form.soy(class_='allergy')}}
+<label for="soy" class="labelcheck">soy</label> 
+{{form.egg(class_='allergy')}} 
+<label for="egg" class="labelcheck">egg</label>
+{{form.fish(class_='allergy')}} 
+<label for="fish" class="labelcheck">fish</label>
+{{form.shellfish(class_='allergy')}}
+<label for="shellfish" class="labelcheck">shellfish</label>
+
+
 </div>
 <div class="button">
 <input type="submit" value="Submit" id="go">
 <label for="go">>> </label>
 </div>
+
+</form>
+
 </body>

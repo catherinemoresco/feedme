@@ -2,11 +2,16 @@ body{
 	font-family: 'Josefin Sans', sans-serif;
 	color: white;
 	background-color:orange;
+	text-align: center;
+	min-width: 850px
 }
 
 h1{
 	font-family: 'Roboto Slab', serif;
 	font-size: 80px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 }
 
 h2{
@@ -14,7 +19,12 @@ h2{
 	font-size: 40px;
 }
 
+
 .nodata{
+	color:#FFCA9C;
+}
+
+.allergic{
 	color:#E36A00;
 }
 
@@ -23,8 +33,10 @@ a{
 	text-decoration:none;
 }
 
+
+
 a.nodata{
-	color:#E36A00;
+	color:#FFCA9C;
 }
 
 a.textlink{
@@ -36,25 +48,22 @@ a:hover{
 }
 
 .time{
-	padding: 60px;
+	padding: 10px;
+	background-color: #FF9500;
+	margin:5px;
 }
 
 .stationtitle{
-	font-size:30px;
+	font-family: 'Roboto Slab', serif;
+	font-size:25px;
 	padding: 15px;
+	text-align: center;
 }
 
 .station{
 	padding:10px;
 }
 
-.dishitem{
-	padding: 5px;
-}
-
-.dishitem{
-	margin-left:30px;
-}
 
 .dishname{
 	font-size:20px;
@@ -73,7 +82,7 @@ input[type="submit"] {
 }
 
 .allergy+.labelcheck{
-	font-size:15px;
+	font-size:20px;
 	padding:3px;
 }
 .allergy:checked + .labelcheck{
@@ -91,7 +100,7 @@ input[type="submit"] {
 
 #question{
 	min-width: 400px;
-	margin-top:25%;
+	margin-top:20%;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
@@ -105,4 +114,104 @@ input[type="submit"] {
 	margin-left: auto;
 	margin-right: auto;
 	width:40%;
+}
+
+.time{
+	max-width: 250px;
+	float:left;
+	margin-right:auto;
+}
+
+.lettermenu{
+	font-size: 20px;
+	padding: 10px;
+	font-family: 'Roboto Slab', serif;
+}
+
+.browsemenu{
+	text-align: center;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.dishitem{
+	padding: 5px;
+	margin-left:30px;
+	text-align: left;
+}
+
+.browselist{
+	text-align: left;
+}
+
+.toggle{
+	font-family: 'Roboto Slab', serif;
+}
+
+#copyright{
+	position: fixed;
+	bottom: 0px;
+	padding:2px;
+	color:white;
+	text-align: center;
+	width:100%;
+	font-size: 10px;
+	background-color: orange;
+	font-family: 'Roboto Slab', serif;
+}
+
+#copyright a{
+	color:white;
+}
+
+#toggles{
+	position:fixed;
+	top:0px;
+	width:100px;
+	background-color: orange;
+}
+
+#toggles #hidenodata{
+	position:fixed;
+	width:50%;
+	background-color: orange;
+	padding-bottom: 2px;
+}
+
+#toggles #hideallergic{
+	position:fixed;
+	right:0px;
+	width:50%;
+	padding-bottom: 2px;
+	background-color: orange;
+}
+
+#info{
+	padding-top: 25%;
+	font-size: 30px;
+}
+
+#menu{
+	margin-left:auto;
+	margin-right: auto;
+	width:825px;
+}
+
+a#switch{
+	font-size: 20px;
+}
+
+#instructions{
+	margin-top: 60px;
+	padding:20px;
+	padding-top: 40px;
+	background-color: white;
+	color:orange;
+	width:800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#instructions a{
+	color:orange;
 }

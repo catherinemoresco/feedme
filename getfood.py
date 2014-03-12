@@ -3,6 +3,13 @@
 import urllib2, re, string
 from bs4 import BeautifulSoup
 
+class Dish(object):
+	def __init__(self, name):
+		self.name = name
+		self.star = ""
+		self.entries = []
+		self.allergens =[]
+
 def getfood():
 	dishnames = []
 	soup = BeautifulSoup(urllib2.urlopen('http://www.campusdish.com/en-US/CSMW/UnivofChicago/#').read())
@@ -13,13 +20,18 @@ def getfood():
 	print soup.prettify()
 	return dishnames
 
-times = {'All Day':{}, 'Breakfast':{}, 'Lunch':{} ,'Dinner':{},'Late Night':{}, 'Brunch':{}}
+
 
 # parse webpage:
-def getfood2():
+def getfood2(dhall):
+	times = {'All Day':{}, 'Breakfast':{}, 'Lunch':{} ,'Dinner':{},'Late Night':{}, 'Brunch':{}, 'Night Snack':{}}
 	dishnames = []
+	if dhall=="Cathey":
+		url='http://www.campusdish.com/en-US/CSMW/UnivofChicago/#'
+	else:
+		url='http://www.campusdish.com/en-US/CSMW/UnivofChicago/Home.htm?LocationID=292'
 # get html:
-	soup = BeautifulSoup(urllib2.urlopen('http://www.campusdish.com/en-US/CSMW/UnivofChicago/#').read())
+	soup = BeautifulSoup(urllib2.urlopen(url).read())
 	for dishes in soup.find_all(id="lcGrad"):
 		for d in dishes:
 			img = d.find("img")	
@@ -50,4 +62,6 @@ def remove_trailing_spaces(st):
 	while st[-1] == ' ':
 		st = st[0:len(st)-1]
 	return st
+
+
 
