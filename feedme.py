@@ -9,7 +9,7 @@ app.config.from_object('config')
 
 app.config.update(dict(
 	DATABASE = os.path.join(app.root_path, 'feedme.db'),
-	DEBUG=True,
+	DEBUG=False,
 	CSRF_ENABLED=False,
 	secret_key="you-will-never-guess"
 ))
