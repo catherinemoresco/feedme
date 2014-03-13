@@ -1,1 +1,1 @@
-web: gunicorn feedme:app
+web: gunicorn app:app
