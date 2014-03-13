@@ -11,6 +11,9 @@
 {% for e in entries %}
 	<p><h2>{{ e.id}}</h2><h3> {{e.gluten}} {{ e.milk}} {{ e.fish}} {{ e.shellfish}} {{ e.peanut}} {{ e.treenut}} {{ e.wheat}} {{ e.soy}} {{e.egg}}</h3><br>{{e.ingredients}}</p><br>
 {% endfor %}
+<div id="confused"><h2>...Confused?</h2>
+	<p>Email <a href="mailto:dining-dietitian@uchicago.edu" class="textlink">dining-dietitian@uchicago.edu</a> with any questions about this information, or ask a manager at your dining hall.</p>
+</div>
 {% else %}
 <h1> Oops! </h1>
 <p>We don't have the allergy information for that item. Try <a href="/browse" class="textlink">browsing</a> for a similar item, or email the dietician at <a href="mailto:dining-dietitian@uchicago.edu" class="textlink">dining-dietitian@uchicago.edu</a> with any questions.</p>
